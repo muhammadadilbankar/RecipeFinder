@@ -6,6 +6,7 @@ import Navbar from '../components/Navbar';
 import LoginModal from '../components/LoginModal';
 import TrendingRecipe from '../components/TrendingRecipe';
 import NewsLetter from '../components/NewsLetter';
+import RecipeGrid from '../components/RecipeGrid';
 
 const LandingPage = () => {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
@@ -132,6 +133,7 @@ const LandingPage = () => {
         </div>
       </section>
       {/* <TrendingRecipe/> */}
+      <TrendingRecipe/>
       <NewsLetter/>
     </div>
   );
