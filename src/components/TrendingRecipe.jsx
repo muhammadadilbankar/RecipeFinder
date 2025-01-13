@@ -1,19 +1,29 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { fetchRecipes } from '../services/apiService';  // Import the fetchRecipes function
 import { randomRecipes } from '../services/apiService';
+import LoginModal from './LoginModal';
+
 const TrendingRecipe = () => {
     const [recipes, setRecipes] = useState([]);  // State to store the fetched recipes
     const [loading, setLoading] = useState(true); // Loading state to show spinner until data is fetched
+    const [isLoginOpen, setIsLoginOpen] = useState(false);
+    const navigate = useNavigate();
 
     const handleViewMore = () => {
-        const isLoggedIn = true; // Replace with actual login check later
+        const isLoggedIn = false; // Replace with actual login check later
         if (!isLoggedIn) {
             // Trigger login popup (simplified here)
-            alert("Please log in to view more recipes.");
+            // alert("Please log in to view more recipes.");
+            setIsLoginOpen(true);
         } else {
             navigate('/recipes'); // Navigate to the recipes page
         }
     };
+    const handleViewRecipe = (recipeId) => {
+        navigate(`/recipe-detail/${recipeId}`); // Navigate only using the recipe ID
+    };
+
     useEffect(() => {
         // Fetch trending recipes when the component mounts
         const getTrendingRecipes = async () => {
@@ -57,13 +67,14 @@ const TrendingRecipe = () => {
                         <p className="text-sm text-gray-600">{recipe.summary.slice(0, 100)}...</p> {/* Truncate the summary */}
                         <button
                             className="mt-4 px-4 py-2 bg-red-500 text-white rounded-md"
-                            onClick={() => alert(`Redirecting to full recipe: ${recipe.id}`)} // Replace this with your actual redirection logic
+                            onClick={() => handleViewRecipe(recipe.id)} // Replace this with your actual redirection logic
                         >
                             View Recipe
                         </button>
                     </div>
                 ))}
             </div>
+            <LoginModal isOpen={isLoginOpen} onClose={() => setIsLoginOpen(false)} />
         </section>
     );
 };

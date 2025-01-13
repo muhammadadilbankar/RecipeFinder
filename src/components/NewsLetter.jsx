@@ -1,6 +1,6 @@
 export default function NewsLetter(){
     return(
-        <div className="bg-pink-50 p-8 rounded-lg shadow-md mt-0 mb-0">
+        <div className="bg-pink-100 p-8 rounded-lg shadow-md mt-0 mb-0">
             <div className="text-center">
                 <h2 className="text-2xl font-bold mb-4">Let's Stay In Touch!</h2>
                 <p className="text-gray-600 mb-6">
